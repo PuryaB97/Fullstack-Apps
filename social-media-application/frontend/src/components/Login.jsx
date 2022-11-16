@@ -10,10 +10,10 @@ import { client } from "../client";
 const Login = () => {
   const navigate = useNavigate();
   const responseGoogle = (response) => {
-    localStorage.setItem("user", JSON.stringify(response.profileObj));
-    const { name, googleId, imageUrl } = response.profileObj;
+    localStorage.setItem("user", JSON.stringify(response));
+    const { clientId, name, imageUrl } = response;
     const doc = {
-      _id: googleId,
+      _id: clientId,
       _type: "user",
       userName: name,
       image: imageUrl,
@@ -54,7 +54,7 @@ const Login = () => {
                 </button>
               )}
               onSuccess={responseGoogle}
-              onFailure={responseGoogle}
+              onError={responseGoogle}
               cookiePolicy="single_host_origin"
             />
           </div>
