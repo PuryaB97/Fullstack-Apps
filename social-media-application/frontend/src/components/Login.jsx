@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import GoogleLogin from "react-google-login";
+import { gapi } from "gapi-script";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import shareVideo from "../assets/share.mp4";
@@ -10,18 +11,31 @@ import { client } from "../client";
 const Login = () => {
   const navigate = useNavigate();
   const responseGoogle = (response) => {
-    localStorage.setItem("user", JSON.stringify(response));
-    const { clientId, name, imageUrl } = response;
+    localStorage.setItem("user", JSON.stringify(response.profileObj));
+    const { name, googleId, imageUrl } = response.profileObj;
+
     const doc = {
-      _id: clientId,
+      _id: googleId,
       _type: "user",
       userName: name,
       image: imageUrl,
     };
+
     client.createIfNotExists(doc).then(() => {
       navigate("/", { replace: true });
     });
   };
+
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: process.env.REACT_PUBLIC_GOOGLE_CLIENT_ID,
+        scope: "email",
+      });
+    }
+
+    gapi.load("client:auth2", start);
+  }, []);
 
   return (
     <div className="flex justify-start items-center flex-col h-screen">
@@ -42,7 +56,7 @@ const Login = () => {
 
           <div className="shadow-2xl">
             <GoogleLogin
-              clientId={`${process.env.REACT_APP_GOOGLE_API_TOKEN}`}
+              clientId={process.env.REACT_APP_GOOGLE_API_TOKEN}
               render={(renderProps) => (
                 <button
                   type="button"
@@ -54,7 +68,7 @@ const Login = () => {
                 </button>
               )}
               onSuccess={responseGoogle}
-              onError={responseGoogle}
+              onFailure={responseGoogle}
               cookiePolicy="single_host_origin"
             />
           </div>

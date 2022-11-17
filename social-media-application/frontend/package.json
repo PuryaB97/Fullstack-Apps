@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@craco/craco": "^6.4.0",
     "@sanity/client": "^2.21.10",
     "@sanity/image-url": "^1.0.1",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "gapi-script": "^1.2.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-google-login": "^5.2.2",
     "react-icons": "^4.3.1",
     "react-loader-spinner": "^4.0.0",
@@ -45,11 +45,11 @@
     ]
   },
   "devDependencies": {
+    "@types/react": "^18.0.5",
+    "@types/react-dom": "^18.0.1",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.19",
     "react-error-overlay": "^6.0.9",
-    "tailwindcss": "^3.2.4",
-    "@types/react": "^18.0.5",
-    "@types/react-dom": "^18.0.1"
+    "tailwindcss": "^3.2.4"
   }
 }
