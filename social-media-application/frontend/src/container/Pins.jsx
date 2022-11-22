@@ -12,15 +12,21 @@ const Pins = ({ user }) => {
         <Navbar
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
-          user={user}
+          user={user && user}
         />
       </div>
       <div className="h-full">
         <Routes>
           <Route path="/" element={<Feed />} />
           <Route path="/category/:categoryId" element={<Feed />} />
-          <Route path="/pin-detail/pinId" element={<PinDetail user={user} />} />
-          <Route path="/create-pin" element={<CreatePin user={user} />} />
+          <Route
+            path="/pin-detail/:pinId"
+            element={<PinDetail user={user && user} />}
+          />
+          <Route
+            path="/create-pin"
+            element={<CreatePin user={user && user} />}
+          />
           <Route
             path="/search"
             element={
