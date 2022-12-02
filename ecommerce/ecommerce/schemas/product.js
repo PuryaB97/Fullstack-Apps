@@ -22,7 +22,7 @@ export default {
       title: "Slug",
       type: "slug",
       options: {
-        sourse: "name",
+        source: "name",
         maxLength: 90,
       },
     },
