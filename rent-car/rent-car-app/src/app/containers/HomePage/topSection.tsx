@@ -5,6 +5,7 @@ import { SCREENS } from "../../components/responsive";
 
 import MclarenCarImg from "../../../assets/images/mclaren-orange-big.png";
 import BlobImg from "../../../assets/images/blob.svg";
+import { Button } from "../../components/button";
 
 const TopSectionContainer = styled.div`
   min-height: 400px;
@@ -149,6 +150,10 @@ export function TopSection() {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
           veritatis aperiam hic dolor vel et nulla asperiores non porro totam.
         </Description>
+        <ButtonsContainer>
+          <Button text="Book Your Ride" />
+          <Button theme="filled" text="Sell You Car" />
+        </ButtonsContainer>
       </LeftContainer>
       <RightContainer>
         <BlobContainer>
