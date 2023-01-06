@@ -10,6 +10,8 @@ import tw from "twin.macro";
 import { Button } from "../button";
 import { Marginer } from "../marginer";
 
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 import { SCREENS } from "../responsive";
 
 const CardContainer = styled.div`
@@ -79,10 +81,27 @@ const LineSeperator = styled.span`
   `};
 `;
 
+const DateCalendar = styled(Calendar)`
+  position: absolute;
+  max-width: none;
+  user-select: none;
+  top: 2em;
+  left: 0;
+  ${({ offset }: any) =>
+    offset &&
+    css`
+      left: -6em;
+    `};
+  @media (min-width: ${SCREENS.md}) {
+    top: 3.5em;
+    left: -2em;
+  }
+` as any;
+
 export function BookCard() {
   const [startDate, setStartDate] = useState<Date>(new Date());
   const [isStartCalendarOpen, setStartCalendarOpen] = useState(false);
-
+  const [returnDate, setReturnDate] = useState<Date>(new Date());
   const [isReturnCalendarOpen, setReturnCalendarOpen] = useState(false);
 
   const toggleStartDateCalendar = () => {
@@ -107,6 +126,9 @@ export function BookCard() {
             icon={isStartCalendarOpen ? faCaretUp : faCaretDown}
           />
         </SmallIcon>
+        {isStartCalendarOpen && (
+          <DateCalendar value={startDate} onChange={setStartDate as any} />
+        )}
       </ItemContainer>
       <LineSeperator />
       <ItemContainer>
@@ -119,6 +141,13 @@ export function BookCard() {
             icon={isReturnCalendarOpen ? faCaretUp : faCaretDown}
           />
         </SmallIcon>
+        {isReturnCalendarOpen && (
+          <DateCalendar
+            offset
+            value={returnDate}
+            onChange={setReturnDate as any}
+          />
+        )}
       </ItemContainer>
       <Marginer direction="horizontal" margin="2em" />
       <Button text="Book Your Ride" />
