@@ -4,7 +4,7 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL }),
   reducerPath: "main",
   tagTypes: [],
-  endpoint: (build) => ({
+  endpoints: (build) => ({
     postAiText: build.mutation({
       query: (payload) => ({
         url: "openai/text",
